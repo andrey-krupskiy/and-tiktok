@@ -128,6 +128,7 @@ textarea {
   --notification-dd-height: 640px;
   --notification-dd-width: 376px;
   --default-fonts: "Poppins", Arial, Tahoma, sans-serif, "Segoe UI Emoji", "Noto Emoji";
+  --default-box-shadow: rgb(0 0 0 / 12%) 0px 1px 1px;
 }
 
 *,
@@ -140,7 +141,7 @@ textarea {
 
 /* Base light theme class for the website. Define everything light-theme related in this class and *nowhere* else. The class is added to the root (html) tag. */
 :root.light {
-	--clr-background: #ffffff;
+	--clr-background: rgb(255, 255, 255);
 	--clr-shadow-values: 0, 0, 0;
 	--clr-shadow: rgba(var(--clr-shadow-values), 0.12);
 	--clr-border: #e5e6e7;
@@ -332,13 +333,23 @@ textarea {
   padding-left: 20px;
 }
 
-/* header.scss converted */
+/* nav/header.scss converted */
+nav { 
+  width: 100%;
+  background: var(--clr-background);
+  box-shadow: var(--default-box-shadow);
+}
+
 .header {
   height: var(--header-height);
-  background: pink;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header .logo-container {
+  display: flex;
+  align-items: center
 }
 
 .header .logo {
@@ -354,7 +365,6 @@ textarea {
   background: var(--clr-background);
   padding-right: 24px;
   padding-left: 20px;
-  background: pink;
 }
 
 .header li {
