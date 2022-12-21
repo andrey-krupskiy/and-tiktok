@@ -1,10 +1,23 @@
+const VIDEO_DIR = "video_data/";
+
 const fs = require("fs");
 const express = require('express')
 const port = 3000;
 const cors = require('cors')
 const app = express();
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, VIDEO_DIR)
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+const upload = multer({ storage: storage })
 
-const VIDEO_DIR = "video_data";
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors())
 
@@ -22,7 +35,7 @@ app.get('/video/:id', (req, res) => {
     res.status(400).send("Requires Range header");
   }
 
-  const videoPath = VIDEO_DIR + "/" + req.params.id + ".mp4";
+  const videoPath = VIDEO_DIR + req.params.id + ".mp4";
   if (!fs.existsSync(videoPath)) {
     res.status(404).send("Video not found");
   }
@@ -41,6 +54,10 @@ app.get('/video/:id', (req, res) => {
   res.writeHead(206, headers);
   const videoStream = fs.createReadStream(videoPath, { start, end });
   videoStream.pipe(res);
+});
+
+app.post("/upload_video", upload.single("file"), (req, res) => {
+  res.json({ message: "Successfilly uploaded files" });
 });
 
 app.listen(port, () => {
