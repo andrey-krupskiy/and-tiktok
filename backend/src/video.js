@@ -28,8 +28,20 @@ const getVideoByIdHandler = (req, res) => {
   videoStream.pipe(res);
 }
 
+const getVideosHandler = (req, res) => {
+  if (!fs.existsSync(VIDEO_DIR)) {
+    console.log(`${VIDEO_DIR} directory does not exist`);
+    res.status(500).send();
+  }
+
+  const videos = fs.readdirSync(VIDEO_DIR).map((video) => video.substring(0, video.lastIndexOf('.')) || filename);
+
+  res.json({ videos: videos });
+
+};
+
 const postVideoHandler = (req, res) => {
   res.json({ message: "Successfilly uploaded files" });
 };
 
-module.exports = { getVideoByIdHandler, postVideoHandler };
+module.exports = { getVideosHandler, getVideoByIdHandler, postVideoHandler };

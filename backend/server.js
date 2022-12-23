@@ -1,4 +1,4 @@
-const { getVideoByIdHandler, postVideoHandler, VIDEO_DIR } = require('./src');
+const { getVideoByIdHandler, getVideosHandler, postVideoHandler, VIDEO_DIR } = require('./src');
 console.log('VIDEO_DIR', VIDEO_DIR);
 
 const fs = require("fs");
@@ -30,7 +30,10 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+// TODO: this should probably be /videos/:id
 app.get('/video/:id', getVideoByIdHandler);
+
+app.get('/videos', getVideosHandler);
 
 app.post("/upload_video", upload.single("file"), postVideoHandler);
 
