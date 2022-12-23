@@ -31,7 +31,7 @@ app.get("/", function(req, res) {
 });
 
 // TODO: this should probably be /videos/:id
-app.get('/video/:id', getVideoByIdHandler);
+app.get('/videos/:id', getVideoByIdHandler);
 
 app.get('/videos', getVideosHandler);
 
