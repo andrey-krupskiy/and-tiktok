@@ -12,11 +12,14 @@ TODO
 ## `GET /`
 Returns an `index.html` page, where a video `1.mp4` is played.
 
-## `GET /video/:id`
+## `GET /videos/:id`
 Where: `:id` -- video id. For now video `id` = filename - extension.
 For `dog.mp4` you need to call `GET /video/dog`
 
 Streams a video to the client. Compatible with the `video` html5 element.
+
+## `GET /videos`
+Returns the filenames of all uploaded videos.
 
 ## `POST /upload_video`
 Uploads a video to the `video_data` folder.
